@@ -2,9 +2,11 @@
 # 中止 Ctrl + C
 # 清除 Clear
 from flask import Flask, jsonify,render_template
+from flask_cors import CORS
 import random
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/get_hrv', methods=['GET'])
 def get_hrv():
@@ -12,7 +14,7 @@ def get_hrv():
     hrv = random.uniform(30.0, 100.0)  # 隨機生成一個 HRV 數據
     return jsonify({'hrv': hrv})
 
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template('home.html')
 
