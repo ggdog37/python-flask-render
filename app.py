@@ -18,5 +18,10 @@ def get_hrv():
 def home():
     return render_template('home.html')
 
+@app.route('/demo')
+def demo():
+    return render_template('0401.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

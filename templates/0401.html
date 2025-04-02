@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRV Monitor</title>
+</head>
+<body>
+    <h1>HRV Monitor</h1>
+    <p>Click the button below to get your HRV data:</p>
+    <button id="getHrvButton">Get HRV</button>
+    <p>Your HRV: <span id="hrvValue">-</span></p>
+    <a href="{{ url_for('home') }}">返回</a> 
+    
+    <script>
+        document.getElementById('getHrvButton').addEventListener('click', function() {
+            // 調用 Azure API
+            fetch('https://python-flask-render-f2hm.onrender.com/get_hrv')
+                .then(response => response.json())
+                .then(data => {
+                    // 更新頁面上的 HRV 數據
+                    document.getElementById('hrvValue').textContent = data.hrv.toFixed(2);
+                })
+                .catch(error => {
+                    console.error('Error fetching HRV:', error);
+                });
+        });
+    </script>
+
+
+</body>
+</html>
